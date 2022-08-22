@@ -1,6 +1,6 @@
 // create a todo react context
 
-import { createContext, ReactNode, useContext, useState } from "react";
+import React, { createContext, ReactNode, useContext, useState } from "react";
 
 interface Todo {
   id: number;
