@@ -16,8 +16,8 @@ import {
 } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { useTodo } from "./providers/provider";
-
+import { useAppDispatch, useAppSelector } from "./redux";
+import { addTodo, toggleTodo } from "./redux/todo.slice";
 function App() {
   interface NewTodo {
     content: string;
@@ -25,14 +25,16 @@ function App() {
 
   const { register, handleSubmit } = useForm<NewTodo>();
 
-  const { todos, addTodo, toggleTodo } = useTodo();
+  const dispatch = useAppDispatch();
 
   const onSubmit: SubmitHandler<NewTodo> = (data: NewTodo) => {
     console.log("submit");
-    addTodo(data.content);
+    dispatch(addTodo({ id: Date.now(), text: data.content, completed: false }));
   };
 
   const { toggleColorMode, colorMode } = useColorMode();
+
+  const todos = useAppSelector((s) => s.todo.todos);
 
   return (
     <Container height="100vh" overflowY={"scroll"}>
@@ -64,7 +66,7 @@ function App() {
             <Text color={"grey"}>{todo.text}</Text>
             <Checkbox
               isChecked={todo.completed}
-              onChange={(e) => toggleTodo(todo.id, e.target.checked)}
+              onChange={(e) => dispatch(toggleTodo(todo.id))}
             />
           </Box>
         ))}
