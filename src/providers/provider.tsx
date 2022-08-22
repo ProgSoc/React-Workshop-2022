@@ -11,7 +11,7 @@ interface Todo {
 interface TodoContextType {
   todos: Todo[];
   addTodo: (text: string) => void;
-  toggleTodo: (id: number) => void;
+  toggleTodo: (id: number, state?: boolean) => void;
 }
 
 const TodoContext = createContext<TodoContextType>({
@@ -32,11 +32,11 @@ export const TodoProvider: React.FC<TodoProviderProps> = ({ children }) => {
     setTodos([...todos, newTodo]);
   };
 
-  const toggleTodo = (id: number) => {
+  const toggleTodo = (id: number, state?: boolean) => {
     const newTodos = [...todos];
     const todo = newTodos.find((todo) => todo.id === id);
     if (todo) {
-      todo.completed = !todo.completed;
+      todo.completed = state !== undefined ? state : !todo.completed;
       setTodos(newTodos);
     }
   };
