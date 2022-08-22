@@ -35,7 +35,7 @@ function App() {
   const { toggleColorMode, colorMode } = useColorMode();
 
   return (
-    <Container height="100vh">
+    <Container height="100vh" overflowY={"scroll"}>
       <Heading>Todo</Heading>
       <Divider />
       <Stack>
