@@ -1,11 +1,9 @@
-import { useState } from "react";
 import "./App.css";
 import progsocLogo from "./assets/progsoc.png";
 import reactLogo from "./assets/react.svg";
+import { ReactCounter } from "./components/counter";
 
 function App() {
-  const [count, setCount] = useState<number>(0);
-
   return (
     <div className="App">
       <div>
@@ -20,14 +18,7 @@ function App() {
         </a>
       </div>
       <h1>Vite + React + Progsoc</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
+      <ReactCounter />
       <p className="read-the-docs">
         Click on the Vite, React and ProgSoc logos to learn more
       </p>
