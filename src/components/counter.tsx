@@ -1,7 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export const ReactCounter: React.FC = () => {
   const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    console.log(count);
+
+    return () => {
+      console.log("unmounting");
+    };
+  }, [count]);
 
   return (
     <div className="card">
